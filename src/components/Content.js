@@ -71,7 +71,8 @@ class Content extends Component {
     } else {
       return (
         <div id="Main">
-          <form>
+          <h1> The Guardian Search</h1>
+          <form id="searchBar">
             <input type="text" value={this.state.value} onChange={this.handleChange} />
             <button onClick={this.newSearch}>search</button>
           </form>

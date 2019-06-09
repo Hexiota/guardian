@@ -13,12 +13,20 @@ button {
   padding: 4pt 8pt;
 }
 
+button:hover {
+  background-color: #009494;
+}
+
 input {
   border-radius: 4pt;
-  border: 1px solid gray;
+  border: 1px solid rgb(204, 204, 204);
   color: #1a1a1a;
   margin: 8pt;
   padding: 4pt 8pt;
+}
+
+input:hover {
+  border: 1px solid rgb(182, 182, 182);
 }
 
 .MainItem {
@@ -42,4 +50,8 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+h4 {
+  font-size: 12pt;
 }

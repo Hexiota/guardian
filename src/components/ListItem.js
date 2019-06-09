@@ -7,7 +7,7 @@ class ListItem extends Component {
     return (
       <a href={this.props.url}>
         <div className='MainItem'>
-          <h5>{this.props.title}</h5>
+          <h4>{this.props.title}</h4>
         </div>
       </a>
     )
