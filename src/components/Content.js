@@ -72,7 +72,7 @@ class Content extends Component {
       return (
         <div id="Main">
           <form>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
             <button onClick={this.newSearch}>search</button>
           </form>
           <LatestList items={this.state.items}/>

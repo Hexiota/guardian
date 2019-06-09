@@ -5,10 +5,11 @@ class ListItem extends Component {
 
   render() {
     return (
-      <div className='MainItem'>
-        <h3>{this.props.title}</h3>
-        <a href={this.props.url}>Link</a>
-      </div>
+      <a href={this.props.url}>
+        <div className='MainItem'>
+          <h5>{this.props.title}</h5>
+        </div>
+      </a>
     )
   }
 }
