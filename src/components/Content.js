@@ -6,6 +6,12 @@ class Content extends Component {
 //API Key
 //d9dccefd-910e-4f42-866b-01818026d6be
 
+//newest
+//https://content.guardianapis.com/search?api-key=d9dccefd-910e-4f42-866b-01818026d6be
+
+//correct search fetch
+//`https://content.guardianapis.com/search?q=${this.state.term}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,11 +21,12 @@ class Content extends Component {
       term: ''
     };
 
+    this.handleChange = this.handleChange.bind(this);
     this.newSearch = this.newSearch.bind(this);
   }
 
-  callAPI = () => {
-    const fetchURL = `https://content.guardianapis.com/search?q=${this.state.term}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+  callAPI = (searchTerm) => {
+    const fetchURL = `https://content.guardianapis.com/search?${searchTerm}api-key=d9dccefd-910e-4f42-866b-01818026d6be`
 
     fetch(fetchURL)
 
@@ -40,20 +47,20 @@ class Content extends Component {
     )
   }
 
-  newSearch(e) {
+  newSearch = (e) => {
     e.preventDefault();
-    let searchTerm = document.getElementById('term').value;
-    this.setState ({
-      term: searchTerm
-    })
-    this.callAPI();
+    let searchTerm = `q=${this.state.term}&`;
+    this.callAPI(searchTerm);
   }
 
   componentDidMount () {
-    this.callAPI();
+    let searchTerm = this.state.term;
+    this.callAPI(searchTerm);
   }
 
-
+  handleChange(event) {
+    this.setState({term: event.target.value});
+  }
 
   render () {
     const { error, isLoaded } = this.state;
@@ -65,7 +72,7 @@ class Content extends Component {
       return (
         <div id="Main">
           <form>
-            <input type="text" id="term"/>
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
             <button onClick={this.newSearch}>search</button>
           </form>
           <LatestList items={this.state.items}/>
