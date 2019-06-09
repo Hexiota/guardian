@@ -12,12 +12,14 @@ class Content extends Component {
       error: null,
       isLoaded: false,
       items: [],
-      term: 'search'
+      term: ''
     };
+
+    this.newSearch = this.newSearch.bind(this);
   }
 
   callAPI = () => {
-    const fetchURL = `https://content.guardianapis.com/${this.state.term}?api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+    const fetchURL = `https://content.guardianapis.com/search?q=${this.state.term}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
 
     fetch(fetchURL)
 
@@ -38,9 +40,20 @@ class Content extends Component {
     )
   }
 
+  newSearch(e) {
+    e.preventDefault();
+    let searchTerm = document.getElementById('term').value;
+    this.setState ({
+      term: searchTerm
+    })
+    this.callAPI();
+  }
+
   componentDidMount () {
     this.callAPI();
   }
+
+
 
   render () {
     const { error, isLoaded } = this.state;
@@ -51,6 +64,10 @@ class Content extends Component {
     } else {
       return (
         <div id="Main">
+          <form>
+            <input type="text" id="term"/>
+            <button onClick={this.newSearch}>search</button>
+          </form>
           <LatestList items={this.state.items}/>
         </div>
       );
