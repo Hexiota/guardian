@@ -1,11 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LatestList from './components/LatestList.js';
+import SearchBar from './components/SearchBar.js';
 
 function App() {
   return (
     <div className="App">
-      
+      <SearchBar />
+      <LatestList />
     </div>
   );
 }
