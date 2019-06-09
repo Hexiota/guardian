@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ListItem from './ListItem';
 
 class LatestList extends Component {
 
@@ -39,6 +40,14 @@ class LatestList extends Component {
       return <div>Loading...</div>;
     } else {
       return (
+        <div>
+        <ul>
+          {items.map(item => (
+            <li key={item.webPublicationDate}>
+              <ListItem title={item.webTitle} url={item.webUrl}/>
+            </li>
+          ))}
+        </ul>
         <ul>
           {items.map(item => (
             <li key={item.webPublicationDate}>
@@ -46,9 +55,10 @@ class LatestList extends Component {
             </li>
           ))}
         </ul>
+        </div>
       );
     }
   }
 }
 
-export default LatestList
+export default LatestList;
