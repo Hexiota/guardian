@@ -8,7 +8,7 @@ class LatestList extends Component {
       <div>
         <ul>
           {this.props.items.map(item => (
-            <li key={item.webPublicationDate}>
+            <li key={item.webTitle}>
               <ListItem title={item.webTitle} url={item.webUrl}/>
             </li>
           ))}
