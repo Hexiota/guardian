@@ -6,7 +6,7 @@ class ListItem extends Component {
   render() {
     return (
       <div className='MainItem'>
-        <h1>{this.props.title}</h1>
+        <h3>{this.props.title}</h3>
         <a href={this.props.url}>Link</a>
       </div>
     )

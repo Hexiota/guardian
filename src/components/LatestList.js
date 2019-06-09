@@ -13,7 +13,7 @@ class LatestList extends Component {
   }
 
   componentDidMount () {
-    fetch("https://content.guardianapis.com/football?api-key=d9dccefd-910e-4f42-866b-01818026d6be")
+    fetch("https://content.guardianapis.com/search?api-key=d9dccefd-910e-4f42-866b-01818026d6be")
 
     .then(res => res.json())
     .then(
@@ -41,20 +41,13 @@ class LatestList extends Component {
     } else {
       return (
         <div>
-        <ul>
-          {items.map(item => (
-            <li key={item.webPublicationDate}>
-              <ListItem title={item.webTitle} url={item.webUrl}/>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {items.map(item => (
-            <li key={item.webPublicationDate}>
-              {item.webTitle}
-            </li>
-          ))}
-        </ul>
+          <ul>
+            {items.map(item => (
+              <li key={item.webPublicationDate}>
+                <ListItem title={item.webTitle} url={item.webUrl}/>
+              </li>
+            ))}
+          </ul>
         </div>
       );
     }

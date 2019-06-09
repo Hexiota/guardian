@@ -4,8 +4,8 @@ class SearchBar extends Component {
   render() {
     return (
         <form>
-            <input placeholder="Search" />
-            <button type="submit"> Search </button>
+            <input type="text" placeholder="Search" id="input"/>
+            <button type="submit" onClick="this.searchFunction"> Search </button>
         </form>
     )
   }
