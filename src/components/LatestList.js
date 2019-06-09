@@ -1,12 +1,54 @@
 import React, { Component } from 'react';
 
 class LatestList extends Component {
-  render() {
-    return (
-      <div className="latest">
-        <p>The latest news</p>
-      </div>
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      items: []
+    };
+  }
+
+  componentDidMount () {
+    fetch("https://content.guardianapis.com/football?api-key=d9dccefd-910e-4f42-866b-01818026d6be")
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          isLoaded: true,
+          items: result.response.results
+        });
+      },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
     )
   }
+
+  render() {
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <ul>
+          {items.map(item => (
+            <li key={item.webPublicationDate}>
+              {item.webTitle}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+  }
 }
+
 export default LatestList
