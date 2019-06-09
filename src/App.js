@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import LatestList from './components/LatestList.js';
-import SearchBar from './components/SearchBar.js';
-
+import Content from './components/Content.js'
 function App() {
 
 //API Key
@@ -10,8 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <SearchBar />
-      <LatestList />
+      <Content />
     </div>
   );
 }

@@ -12,8 +12,10 @@ class LatestList extends Component {
     };
   }
 
-  componentDidMount () {
-    fetch("https://content.guardianapis.com/search?api-key=d9dccefd-910e-4f42-866b-01818026d6be")
+  componentDidUpdate () {
+    const fetchURL = `https://content.guardianapis.com/${this.props.searchTerm}?api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+
+    fetch(fetchURL)
 
     .then(res => res.json())
     .then(
