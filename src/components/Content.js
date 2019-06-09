@@ -9,30 +9,52 @@ class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: "search"
+      error: null,
+      isLoaded: false,
+      items: [],
+      term: 'search'
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    let searchTerm = document.getElementById('input').value;
-    this.setState ({
-      term: searchTerm
-    })
+  callAPI = () => {
+    const fetchURL = `https://content.guardianapis.com/${this.state.term}?api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+
+    fetch(fetchURL)
+
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          isLoaded: true,
+          items: result.response.results
+        });
+      },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
+    )
+  }
+
+  componentDidMount () {
+    this.callAPI();
   }
 
   render () {
-    return (
-      <div id="Main">
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" id="input" className="input" placeholder="Search..." />
-          <input type="submit" value="Submit" />
-        </form>
-        <LatestList searchTerm={this.state.term}/>
-      </div>
-    );
+    const { error, isLoaded, items } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div id="Main">
+          <LatestList items={this.state.items}/>
+        </div>
+      );
+    }
   }
 }
 
