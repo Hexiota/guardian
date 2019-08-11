@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import LatestList from './LatestList.js';
 
 class Content extends Component {
@@ -26,7 +26,7 @@ class Content extends Component {
   }
 
   callAPI = (searchTerm) => {
-    const fetchURL = `https://content.guardianapis.com/search?${searchTerm}api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+    const fetchURL = `https://content.guardianapis.com/search?show-fields=thumbnail&q=${searchTerm}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
 
     fetch(fetchURL)
 
@@ -49,7 +49,7 @@ class Content extends Component {
 
   newSearch = (e) => {
     e.preventDefault();
-    let searchTerm = `q=${this.state.term}&`;
+    let searchTerm = `${this.state.term}`;
     this.callAPI(searchTerm);
   }
 

@@ -5,15 +5,18 @@ class LatestList extends Component {
 
   render() {
     return (
-      <div>
         <ul>
           {this.props.items.map(item => (
             <li key={item.webTitle}>
-              <ListItem title={item.webTitle} url={item.webUrl} topic={item.sectionName}/>
+              <ListItem
+                title={item.webTitle}
+                url={item.webUrl}
+                image={item.fields.thumbnail}
+                topic={item.sectionName}
+              />
             </li>
           ))}
         </ul>
-      </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  width: 70%;
+  max-width: 700pt;
   margin: 32pt auto 0 auto;
 }
 
@@ -30,18 +30,29 @@ input:hover {
 }
 
 .MainItem {
-  background-color: rgb(216, 216, 216);
-  border-radius: 4pt;
-  padding: 4pt 16pt;
-  border:none;
   color: #1a1a1a;
   text-align: left;
   margin-bottom: 4pt;
-
+  display: flex;
+  flex-direction: row;
+  min-height: 70pt;
+  max-height: 100pt;
 }
 
-.MainItem:hover {
-  background-color: rgb(231, 231, 231);
+.TextContent {
+  margin-left: 16pt;
+  flex: 3;
+}
+
+.ImgDiv {
+  flex: 1;
+  max-width: 150pt;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+
 }
 
 ul {
@@ -54,8 +65,10 @@ a {
 
 h4 {
   font-size: 12pt;
+  margin: 0;
 }
 
 h5 {
   color:  #464646;
+  margin: 0;
 }

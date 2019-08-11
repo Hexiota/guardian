@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class ListItem extends Component {
 
@@ -7,8 +7,13 @@ class ListItem extends Component {
     return (
       <a href={this.props.url}>
         <div className='MainItem'>
-          <h4>{this.props.title}</h4>
-          <h5>Topic: {this.props.topic}</h5>
+          <div className='ImgDiv'>
+            <img src={this.props.image} />
+          </div>
+          <div className='TextContent'>
+            <h5>{this.props.topic}</h5>
+            <h4>{this.props.title}</h4>
+          </div>
         </div>
       </a>
     )
