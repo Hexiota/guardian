@@ -6,7 +6,8 @@ class Dropdown extends Component {
   render () {
     return(
       <select id="SectionSelection">
-          {this.props.list.map(item => (
+          <option key='' value=''></option>
+          {this.props.list.map(item => (  
             <option key={item.webTitle} value={item.id}>
               {item.webTitle}
             </option>
