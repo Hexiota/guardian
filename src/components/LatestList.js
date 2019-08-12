@@ -3,7 +3,7 @@ import ListItem from './ListItem';
 
 class LatestList extends Component {
 
-  render() {
+  /*render() {
     return (
         <ul>
           {this.props.items.map(item => (
@@ -14,6 +14,17 @@ class LatestList extends Component {
                 image={item.fields.thumbnail}
                 topic={item.sectionName}
               />
+            </li>
+          ))}
+        </ul>
+    );
+  }*/
+  render() {
+    return (
+        <ul>
+          {this.props.items.map(item => (
+            <li key={item.webTitle}>
+              <ListItem item={item} />
             </li>
           ))}
         </ul>
