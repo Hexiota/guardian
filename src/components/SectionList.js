@@ -17,7 +17,7 @@ class SectionList extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: [],
+      sections: [],
       term: ''
     };
 
@@ -37,7 +37,7 @@ class SectionList extends Component {
 
         this.setState({
           isLoaded: true,
-          items: result.response.results
+          sections: result.response.results
         });
       },
       (error) => {
@@ -71,7 +71,7 @@ class SectionList extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <Dropdown list={this.state.items} />
+        <Dropdown list={this.state.sections} />
       );
     }
   }

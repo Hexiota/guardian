@@ -28,7 +28,7 @@ class Content extends Component {
   }
 
   callAPI = (searchTerm, section) => {
-    const fetchURL = `https://content.guardianapis.com/search?${section}&show-fields=thumbnail&q=${searchTerm}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+    const fetchURL = `https://content.guardianapis.com/search?show-fields=thumbnail&${section}&q=${searchTerm}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
     fetch(fetchURL)
     .then(res => res.json())
     .then(
@@ -45,13 +45,23 @@ class Content extends Component {
         });
       }
     )
+    .then(console.log(this.state.items))
+  }
+
+  getSection = () => {
+    if ((document.getElementById('SectionSelection').value) === '') {
+      return '';
+    } else {
+      return `section=${document.getElementById('SectionSelection').value}&`;
+    }
   }
 
   newSearch = (e) => {
     this.setState({items: []});
     console.log(this.state.section);
     e.preventDefault();
-    let section = `section=${document.getElementById('SectionSelection').value}&`;
+    let section = this.getSection();
+    console.log(section);
     let searchTerm = `${this.state.term}`;
     this.callAPI(searchTerm, section);
   }
@@ -59,7 +69,7 @@ class Content extends Component {
   componentDidMount () {
     let section = '';
     let searchTerm = this.state.term;
-    this.callAPI(searchTerm);
+    this.callAPI(searchTerm, section);
   }
 
   handleChange(event) {
@@ -74,13 +84,15 @@ class Content extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div id="Main">
-          <h1> The Guardian</h1>
-          <SectionList />
-          <form id="searchBar">
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-            <button onClick={this.newSearch}>search</button>
-          </form>
+        <div className="main">
+          <h1>The Guardian</h1>
+          <div className="header">
+            <form id="searchBar">
+              <SectionList />
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+              <button onClick={this.newSearch}>search</button>
+            </form>
+          </div>
           <LatestList items={this.state.items}/>
         </div>
       );
