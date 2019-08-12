@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import LatestList from './LatestList.js';
-import SectionList from './SectionList.js';
+import Dropdown from './Dropdown.js';
 
-class Content extends Component {
+class SectionList extends Component {
 
 //API Key
 //d9dccefd-910e-4f42-866b-01818026d6be
@@ -16,7 +15,6 @@ class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      section: '',
       error: null,
       isLoaded: false,
       items: [],
@@ -27,12 +25,16 @@ class Content extends Component {
     this.newSearch = this.newSearch.bind(this);
   }
 
-  callAPI = (searchTerm, section) => {
-    const fetchURL = `https://content.guardianapis.com/search?${section}&show-fields=thumbnail&q=${searchTerm}&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+  callAPI = () => {
+    const fetchURL = `https://content.guardianapis.com/sections?&api-url&api-key=d9dccefd-910e-4f42-866b-01818026d6be`
+
     fetch(fetchURL)
+
     .then(res => res.json())
     .then(
       (result) => {
+        console.log(result);
+
         this.setState({
           isLoaded: true,
           items: result.response.results
@@ -48,18 +50,13 @@ class Content extends Component {
   }
 
   newSearch = (e) => {
-    this.setState({items: []});
-    console.log(this.state.section);
     e.preventDefault();
-    let section = `section=${document.getElementById('SectionSelection').value}&`;
     let searchTerm = `${this.state.term}`;
-    this.callAPI(searchTerm, section);
+    this.callAPI(searchTerm);
   }
 
   componentDidMount () {
-    let section = '';
-    let searchTerm = this.state.term;
-    this.callAPI(searchTerm);
+    this.callAPI();
   }
 
   handleChange(event) {
@@ -74,18 +71,10 @@ class Content extends Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div id="Main">
-          <h1> The Guardian</h1>
-          <SectionList />
-          <form id="searchBar">
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-            <button onClick={this.newSearch}>search</button>
-          </form>
-          <LatestList items={this.state.items}/>
-        </div>
+        <Dropdown list={this.state.items} />
       );
     }
   }
 }
 
-export default Content;
+export default SectionList;
